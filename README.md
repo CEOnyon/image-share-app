@@ -9,4 +9,6 @@ Url:"https://wbd.ms/share/v2/aHR0cHM6Ly93aGl0ZWJvYXJkLm1pY3Jvc29mdC5jb20vYXBpL3Y
     - Bucketeer
     - Cloudinary
 - NodeJS
-- 
+- Express
+- MongoDB
+- Bootsrap
