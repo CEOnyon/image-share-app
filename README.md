@@ -12,4 +12,12 @@ Url:"https://wbd.ms/share/v2/aHR0cHM6Ly93aGl0ZWJvYXJkLm1pY3Jvc29mdC5jb20vYXBpL3Y
 - Express
 - MongoDB
 - Bootsrap
-- JSX
+- ReactJS
+
+
+#ICONS
+https://icons8.com/icon/set/photo-and-video/3d-fluency
+https://icons8.com/icons/set/cloud-upload
+https://icons8.com/icon/set/icon-upload/3d-fluency
+https://icons8.com/icon/set/gear/3d-fluency
+
