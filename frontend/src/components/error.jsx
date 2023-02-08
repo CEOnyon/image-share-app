@@ -1,13 +1,14 @@
 import React from "react";
 
 
-const error404 = () =>{
+const Error = () =>{
     return(
         <div>
             <h1>404Page</h1>
-            <p>Redirecting to <span>Sign Up</span></p>
+            <p>Redirecting to </p>
+            {/* <Link to="/">Back to Homepage</Link> */}
         </div>
     )
 }
 
-export default error404;
+export default Error;

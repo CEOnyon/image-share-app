@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Error from './components/error.jsx';
 
 function App() {
   return (
@@ -7,7 +8,11 @@ function App() {
       <header className="App-header">
         Oddballs
       </header>
+      {/* <Route path='*'>
+        <Error/>
+        </Route> */}
     </div>
+    
   );
 }
 
