@@ -1,4 +1,4 @@
-export default function newUser() {
+export default function NewUser() {
     return (
         <div className="signup">
             <h1>Sign Up</h1>  
