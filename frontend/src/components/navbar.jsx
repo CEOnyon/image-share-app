@@ -1,11 +1,11 @@
 import React from 'react'
 import {Container,Nav,Navbar,NavDropdown,Form,Button} from 'react-bootstrap'
-
+import logo from "../assets/logo.png"
 function TopNav() {
   return (
-    <Navbar className='navbar' variant='dark' expand="lg">
+    <Navbar className='navbar' bg="dark" variant='dark' expand="lg">
       <Container>
-        <Navbar.Brand href="#home">Tempic</Navbar.Brand>
+      <Navbar.Brand><img src={logo} alt="logo"/></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
