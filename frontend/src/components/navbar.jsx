@@ -1,27 +1,32 @@
 import React from 'react'
-import {Container,Nav,Navbar,Button,Form} from 'react-bootstrap'
+import {Container,Nav,Navbar,NavDropdown,Form,Button} from 'react-bootstrap'
 
 function TopNav() {
   return (
     <Navbar className='navbar' variant='dark' expand="lg">
       <Container>
-        <Navbar.Brand href="#home">Name</Navbar.Brand>
+        <Navbar.Brand href="#home">Tempic</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#login">Login</Nav.Link>
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#upload">Upload</Nav.Link>
-          </Nav>
+          <Nav className="ml-auto">
+            <Nav.Link href="#home"><i class="bi bi-house-door-fill" style={{ fontSize: 30 }}></i>Home</Nav.Link>
+            <Nav.Link href="#upload"><i class="bi bi-file-plus-fill" style={{ fontSize: 30 }}></i>New Post</Nav.Link>
+            {/* fix dropdown arrow and profile alignment with other pages*/}
+            <NavDropdown title={<div style={{fontSize: 20}}><i class="bi bi-person-fill"></i> Profile </div>} id="navbarScrollingDropdown">
+              <NavDropdown.Item href="#register"><i class="bi bi-person-fill-add" style={{ fontSize: 20 }}></i>Register</NavDropdown.Item>
+              <NavDropdown.Item href="#login"><i class="bi bi-box-arrow-in-right" style={{ fontSize: 20 }}></i>Login</NavDropdown.Item>
+            </NavDropdown>
+            {/* fix searchbar to far right */}
           <Form className="d-flex" pullRight>
             <Form.Control
               type="search"
               placeholder="Search"
-              className="search"
+              className="me-auto"
               aria-label="Search"
             />
-            <Button variant="dark">Search</Button>
+            <Button variant="dark"><i class="bi bi-search"></i></Button>
           </Form>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
