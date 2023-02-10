@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import React, { Component }  from 'react';
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -7,10 +7,12 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        console.log(e);
     }
 
     return (
-        <form className="login" onSubmit={handlesubmit}>
+        <form className="login" onSubmit>
             <h3>Login</h3>
 
             <label>Email:</label>

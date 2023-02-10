@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import React, { Component }  from 'react';
 
 const Signup = () => {
     const [email, setEmail] = useState('')
@@ -10,7 +10,7 @@ const Signup = () => {
     }
 
     return (
-        <form className="signup" onSubmit={handlesubmit}>
+        <form className="signup" onSubmit>
             <h3>Sign up</h3>
 
             <label>Email:</label>
