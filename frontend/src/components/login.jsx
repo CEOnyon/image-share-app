@@ -1,24 +1,37 @@
-import React from 'react';
+import { useState } from 'react'
+import React, { Component }  from 'react';
 
-export default function Login() {
-  return(
-    <div className="login-wrapper">
-     Login to Profile
-      <form on submit={ handleSubmit}>
-        <label>
-          <p>Username</p>
-          <input type="text" onChange = {e => setUserName(e.target.value)}/>
-        </label>
-        <label>
-          <p>Password</p>
-          <input type="password" onChange = {e => setPassword(e.target.value)}/>
-        </label>
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </div>
-  )
+const Login = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        console.log(e);
+    }
+
+    return (
+        <form className="login" onSubmit>
+            <h3>Login</h3>
+
+            <label>Email:</label>
+            <input
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+            />
+            <label>Password</label>
+            <input
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+            />
+
+            <button>Login</button>
+        </form>
+    )
+
 }
 
-
+export default Login;
