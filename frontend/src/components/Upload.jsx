@@ -1,3 +1,4 @@
+
 export default function NewPost() {
     return (
         <div className="new-post">
