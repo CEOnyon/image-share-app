@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Error from './components/error.jsx';
+// import Error from './components/error.jsx';
 
 function App() {
   return (
