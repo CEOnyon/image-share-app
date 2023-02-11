@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import React, { Component }  from 'react';
+import React, { Component } from "react";
 
-const Signup = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+export default class SignUp extends Component {
+    render() {
+        return (
+            <div className="signup-form">
+            <form>
+                <h3>Register</h3>
+                
+                <div className="form-group">
+                    <label>First name</label>
+                    <input type="text" className="form-control" placeholder="First name" />
+                </div>
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+                <div className="form-group">
+                    <label>Last name</label>
+                    <input type="text" className="form-control" placeholder="Last name" />
+                </div>
+
+                <div className="form-group">
+                    <label>Email</label>
+                    <input type="email" className="form-control" placeholder="Enter email" />
+                </div>
+
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type="password" className="form-control" placeholder="Enter password" />
+                </div>
+
+                <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
+                <p className="forgot-password text-right" style={{fontSize:20}}>
+                    Already registered <a href="/login">log in?</a>
+                </p>
+            </form>
+            </div>
+        );
     }
-
-    return (
-        <form className="signup" onSubmit>
-            <h3>Sign up</h3>
-
-            <label>Email:</label>
-            <input
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-            />
-            <label>Password</label>
-            <input
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-            />
-
-            <button>Sign up</button>
-        </form>
-    )
-
 }
-
-export default Signup
+// export default function Register() {
+//     return (
+//         <div className="register">
+//             <h1>Register</h1>  
+//         </div>
+//     )
+// }
