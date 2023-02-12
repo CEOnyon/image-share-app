@@ -7,7 +7,7 @@ import Upload from './components/Upload.jsx';
 import Home from './components/Home.jsx';
 import SignUp from './components/SignUp.jsx'
 import Login from './components/login.jsx'
-
+import Error from './components/error.jsx';
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
           <Route exact path="/"component={Home} />
           <Route exact path='/login' component={Login}/>
           <Route exact path="/signUp"component={SignUp} />
+          <Route exact path='/error' component={Error}/>
         </Switch>
       </Router>
     </BrowserRouter>
