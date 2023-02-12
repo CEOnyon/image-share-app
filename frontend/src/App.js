@@ -5,7 +5,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import Navbar from './components/navbar.jsx';
 import Upload from './components/Upload.jsx';
 import Home from './components/Home.jsx';
-import SignUp from './components/SignUp.jsx'
+import SignUp from './components/Signup.jsx'
 import Login from './components/login.jsx'
 import Error from './components/error.jsx';
 
