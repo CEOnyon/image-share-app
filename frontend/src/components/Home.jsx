@@ -24,7 +24,7 @@ export default function Home() {
                         key = {index}
                         cloudName = {ProcessingInstruction.env.REACT_APP_CLOUDINARY_NAME}
                         publicId = {picId}
-                        width = "250"
+                        width = "300"
                         crop = "scale"
                     />
                 ))}
