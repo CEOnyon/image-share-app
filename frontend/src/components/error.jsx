@@ -8,7 +8,9 @@ export default class Error extends Component {
         
         <div className='error404'>            
             <img src={error} alt='melting ice cream cone' height={600} width={800} />
+           <p><a href="/Home">Back Home</a></p>
         </div>
+       
        
     )};
 }
