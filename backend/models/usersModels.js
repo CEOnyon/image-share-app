@@ -9,23 +9,23 @@ const userSchema = new Schema({
     //unique prevents multiple of the same name    
     username: {
         type: String,
-        required: [true, `Please enter a userName`],
-        unique: [true, `Unfortunately this username is taken`],
+        required: [true],
+        unique: [true] ,
         trim: [true],
-        minlength: [4,`Minimun user name length is size 4`],
+        minlength: [4],
     },
     
     email:{
         type: String,
-        required: [true, `Please enter an email`],
+        required: [true],
         lowcase: [true],
-        validate: [isEmail, `Please enter a valid email`]
+        validate: [isEmail]
     },
     
     password: {
         type: String, 
-        required: [true, `please enter a password`],
-        minlength: [6, `Minimum password length is 6 characters`]
+        required: [true],
+        minlength: [6]
     }
 
 })
