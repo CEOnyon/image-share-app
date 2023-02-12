@@ -1,14 +1,16 @@
 import React, { Component }  from 'react';
 import error from '../assets/error404.jpg'
 
-function Error404() {
+
+export default class Error extends Component {
+    render(){
     return (
-        <main>
-            <h1>404: PAGE NOT FOUND</h1>
-            <p>Oops, sorry, we can't find this page!</p>
-            <img src="../assets/error404.jpg" alt="melting ice cream cone" />
-        </main>
-    );
+        
+        <div className='error404'>            
+            <img src={error} alt='melting ice cream cone' height={600} width={800} />
+        </div>
+       
+    )};
 }
 
-export default Error404;
+
