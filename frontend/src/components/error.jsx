@@ -1,3 +1,6 @@
+import React, { Component }  from 'react';
+import error from '../assets/error404.jpg'
+
 function Error404() {
     return (
         <main>
