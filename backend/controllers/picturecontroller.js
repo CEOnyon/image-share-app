@@ -31,9 +31,6 @@ app.post('/api/upload', async (req, res) => {
 
 
 
-//Create pictures ROUTE: POST /api/pictures
-
-
 
 
 //Update pictures ROUTE: PUT /api/pictures/:id

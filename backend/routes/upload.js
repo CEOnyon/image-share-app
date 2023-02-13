@@ -1,8 +1,17 @@
 
-//require express
+const express = require('express');
 const router = require(`express`).Router();
-//deconstruct to get register and login
-const { registerUser, loginUser } = require(`../controllers/usercontroller`);
+const multer  = require('multer');
+const Upload = require("../models/pictureModels");
+const app = express();
+
+//setting options for multer
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+
+
+
 
 //Routes
 //login
