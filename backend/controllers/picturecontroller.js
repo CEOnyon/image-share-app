@@ -1,6 +1,8 @@
 const asyncHandler = require('express-async-handler');
 
+
 const getImage = async (req, res) => {
+
     const { resources } = await cloudinary.search
         .expression('folder:dev_setups')
         .sort_by('public_id', 'desc')
@@ -23,9 +25,29 @@ const postImage = async (req, res) => {
         console.error(err);
         res.status(500).json({ err: 'Something went wrong' });
     }
+
+});
+
+
+
+
+//Create pictures ROUTE: POST /api/pictures
+
+
+
+
+//Update pictures ROUTE: PUT /api/pictures/:id
+
+
+
+
+//Delete pictures route: DELETE /api/pictures/:_id
+
 };
 
 module.exports = {
     getImage,
     postImage
 }
+
+

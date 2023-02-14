@@ -43,3 +43,14 @@ code {
 #container{
   padding-top: 5%;
 }
+
+.error404{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 10%;
+}
+
+.backhome{
+  display: center;
+}
