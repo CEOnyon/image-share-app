@@ -13,7 +13,7 @@ import { nanoid } from "nanoid";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
 
 // Setup Express
-const app = express();              // Setup Express
+const app = express();              
 app.use(express.json());            // Accept JSON data on post
 app.use((err, req, res, next) => {  // Default Error Handler (Send errors to Console, not to Client)
   console.error(err.stack)
@@ -35,9 +35,6 @@ app.use(cors());
 
 
 
-
-const port = process.env.PORT || 5001;
-
 app.listen(port, () =>{
     console.log(`Server is running on: ${port}`)
 });
@@ -55,3 +52,5 @@ app.post("/image", upload.single('gif'), async (req, res) => {
     console.log(req.body, req.file, meta)
     res.json({ my: "butt"});
 });
+
+const port = process.env.PORT || 5001;
