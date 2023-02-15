@@ -3,6 +3,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 //allows use of express cors and moongoose
+
 import express from "express";
 import cors from "cors";
 import multer from "multer";
@@ -27,13 +28,16 @@ const upload = multer({
   });
 
 // Setup Middleware
+
 app.use(express.static('public'));
 app.use(express.json({ limit: '50mb' }));
 app.use(cors());
 
 
 
+
 const port = process.env.PORT || 5001;
+
 app.listen(port, () =>{
     console.log(`Server is running on: ${port}`)
 });
