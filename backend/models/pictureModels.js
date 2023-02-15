@@ -1,13 +1,30 @@
 const mongoose = require('mongoose');
 
 const imageSchema = new mongoose.Schema({
-    fileName: {
-        name: String,
-        desc: String,
+    contentId: String,
+    fileName: String,
+    fileNameOnS3: String,
+    width: Number,
+    height: Number,
+    imageType: String,
+    //todo add user id ref
+    imageCreated: {
+        type: Date,
+        default: Date.now
     },
-    file: {
-        data: Buffer,
-        contentType: string
+    meta: {
+        gag: {
+             type: Number,
+             default: 0
+        },
+        thumbsUp: {
+            type: Number,
+            default: 0
+        },
+        thumbsDown: {
+            type: Number,
+            default:0
+        }
     }
 });
 
