@@ -27,30 +27,79 @@ const upload = multer({
     }
   });
 
-// Setup Middleware
-
+  // Setup Middleware
 app.use(express.static('public'));
-app.use(express.json({ limit: '50mb' }));
 app.use(cors());
 
-
-
-app.listen(port, () =>{
-    console.log(`Server is running on: ${port}`)
-});
-
-app.get("/", (req, res) => {
-    res.json({ i: "win" });
-});
-
-app.post("/image", upload.single('gif'), async (req, res) => {
-    const buffer = await readChunk(req.file.path, {length: minimumBytes});
-    let meta = await imageType(buffer);
-    if (meta === false) {
-        return res.status(415).end()
-    }
-    console.log(req.body, req.file, meta)
-    res.json({ my: "butt"});
-});
-
+ // Start Express
 const port = process.env.PORT || 5001;
+app.listen(port, () =>{
+  console.log(`Server is running on: ${port}`)
+}); 
+
+
+// Default Homepage
+app.get("/", (req, res) => {
+    return res.send("Hello World.").end();
+});
+
+// Image Upload
+app.post("/upload", upload.single('image'), async (req, res) => {
+
+    // Define image mime types we will allow.
+    const allowedImageTypes = [
+      "image/gif",
+      "image/jpeg",
+      "image/png",
+      "image/webp"
+    ]
+  
+    // Validate we have a buffer
+    if(!("file" in req)) {
+      return res.status(400).send("Invalid Upload.");
+    }
+  
+  
+    // If we have gotten this far, the file is now loaded into memory at
+    // req.file.buffer as a buffer. Let's pass in the buffer into the
+    // image-type script to detect if it's a valid image.
+    const imageMeta = await imageType(req.file.buffer);
+    if(!allowedImageTypes.includes(imageMeta.mime)) {
+      console.log("Invalid Image Uploaded.", imageMeta); // Error message to console.
+      return res.status(400).send("Invalid Image Type"); // Send error to client. Halt further code.
+    }
+  
+   //create a random string for the image name.
+    const id = nanoid();              
+  
+    // Create the image object, probably sending this to Mongo.
+    let imageContent = {
+      name: req.file.originalname,        // Name of file on uploaders computer.
+      nameOnS3: `${id}.${imageMeta.ext}`, // Name of file on S3.
+      type: imageMeta.ext,                // Image Type, (such as jpeg, gif, etc)
+    }
+  
+    // Setup S3 Command
+    const input = {
+      Bucket: process.env.BUCKET_NAME,
+      Body: req.file.buffer,
+      ContentType: imageMeta.mime,
+      Key: `${process.env.BUCKET_PREFIX}/${imageContent.nameOnS3}`
+    };
+  
+    const client   = new S3Client();
+    const command  = new PutObjectCommand(input);
+    await client.send(command);
+  
+    const public_url = `${process.env.BUCKET_URL}${input.Key}`;
+  
+    const output = {
+      meta: imageMeta,
+      filename: imageContent.nameOnS3,
+      s3_url: public_url,
+      cloudinary_url: `${process.env.CLOUDINARY_URL}/image/fetch/c_crop,h_300,w_300/r_max/${public_url}`
+    };
+  
+    return res.json(output);
+  
+  });
