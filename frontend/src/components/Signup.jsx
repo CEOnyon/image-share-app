@@ -1,7 +1,31 @@
-import React, { Component } from "react";
+import { useState } from "react"
+import { useHistory } from "react-router"
 
-export default class SignUp extends Component {
-    render() {
+function SignUp() {
+
+	const history = useHistory()
+
+	const [user, setUser] = useState({
+		firstName: '',
+		lastName: '',
+		email: '',
+		password: ''
+	})
+
+	async function handleSubmit(e) {
+		e.preventDefault()
+
+		await fetch(`http://localhost:5000/users/`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(user)
+		})
+
+		history.push(`/`)
+	}
+
         return (
             <div className="signup-form">
             <form>
@@ -35,11 +59,4 @@ export default class SignUp extends Component {
             </div>
         );
     }
-}
-// export default function Register() {
-//     return (
-//         <div className="register">
-//             <h1>Register</h1>  
-//         </div>
-//     )
-// }
+export default SignUp

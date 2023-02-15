@@ -1,8 +1,38 @@
-import React, { Component }  from 'react';
+import { useContext, useState }  from 'react';
+import { useHistory } from 'react-router'
 
+    function Login() {
 
-export default class Login extends Component {
-    render(){
+        const history = useHistory()
+    
+        const { setCurrentUser } = useContext(CurrentUser)
+    
+        const [credentials, setCredentials] = useState({
+            email: '',
+            password: ''
+        })
+    
+        const [errorMessage, setErrorMessage] = useState(null)
+    
+        async function handleSubmit(e) {
+            e.preventDefault()
+           const response = await fetch('http://localhost:5000/authentication/', {
+            method: 'POST',
+            headers: {
+                'Content.Type': 'application/json'
+            },
+            body: JSON.stringify(credentials)
+           });
+           const data = await response.json();
+           
+           if (response.status === 200) {
+            setCurrentUser(data.user)
+            history.push('/')
+           } else {
+            setErrorMessage(data.message)
+           }
+        }
+    
         return (
             
             <div className="login-form">
@@ -30,39 +60,4 @@ export default class Login extends Component {
             </div>
         );
     }
-}
-
-// const Login = () => {
-//     const [email, setEmail] = useState('')
-//     const [password, setPassword] = useState('')
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault()
-
-//         console.log(e);
-//     }
-
-//     return (
-//         <form className="login" onSubmit>
-//             <h3>Login</h3>
-
-//             <label>Email:</label>
-//             <input
-//                 type="email"
-//                 onChange={(e) => setEmail(e.target.value)}
-//                 value={email}
-//             />
-//             <label>Password</label>
-//             <input
-//                 type="password"
-//                 onChange={(e) => setPassword(e.target.value)}
-//                 value={password}
-//             />
-
-//             <button>Login</button>
-//         </form>
-//     )
-
-// }
-
-// export default Login
+export default Login
