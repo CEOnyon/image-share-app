@@ -1,31 +1,34 @@
-import { useState } from "react"
-import { useHistory } from "react-router"
+// import { useState } from "react"
+// import { useHistory } from "react-router"
 
-function SignUp() {
+// function SignUp() {
 
-	const history = useHistory()
+// 	const history = useHistory()
 
-	const [user, setUser] = useState({
-		firstName: '',
-		lastName: '',
-		email: '',
-		password: ''
-	})
+// 	const [user, setUser] = useState({
+// 		firstName: '',
+// 		lastName: '',
+// 		email: '',
+// 		password: ''
+// 	})
 
-	async function handleSubmit(e) {
-		e.preventDefault()
+// 	async function handleSubmit(e) {
+// 		e.preventDefault()
 
-		await fetch(`http://localhost:5000/users/`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(user)
-		})
+// 		await fetch(`http://localhost:5000/users/`, {
+// 			method: 'POST',
+// 			headers: {
+// 				'Content-Type': 'application/json'
+// 			},
+// 			body: JSON.stringify(user)
+// 		})
 
-		history.push(`/`)
-	}
+// 		history.push(`/`)
+// 	}
+import React, { Component } from "react";
 
+export default class SignUp extends Component {
+    render() {
         return (
             <div className="signup-form">
             <form>
@@ -59,6 +62,6 @@ function SignUp() {
             </div>
         );
     }
-
-export default SignUp
+}
+// export default SignUp
 

@@ -1,38 +1,42 @@
-import { useContext, useState }  from 'react';
-import { useHistory } from 'react-router'
 
-    function Login() {
+import React, { Component }  from 'react';
+import axios from "axios";
 
-        const history = useHistory()
-    
-        const { setCurrentUser } = useContext(CurrentUser)
-    
-        const [credentials, setCredentials] = useState({
-            email: '',
-            password: ''
-        })
-    
-        const [errorMessage, setErrorMessage] = useState(null)
-    
-        async function handleSubmit(e) {
-            e.preventDefault()
-           const response = await fetch('http://localhost:5000/authentication/', {
-            method: 'POST',
-            headers: {
-                'Content.Type': 'application/json'
-            },
-            body: JSON.stringify(credentials)
-           });
-           const data = await response.json();
-           
-           if (response.status === 200) {
-            setCurrentUser(data.user)
-            history.push('/')
-           } else {
-            setErrorMessage(data.message)
-           }
+export default class Login extends Component {
+    constructor(props){
+        super(props);
+        this.state ={
+            email: "email",
+            password: "password",
         }
-    
+    }
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    login = () => {
+        const {username, password} = this.state;
+
+        axios(`/users/login`, {
+          method: "POST", 
+          data: {
+              username,
+              password,
+          }
+        })
+        .then(response => {
+            localStorage.setItem('token', response.data.token);
+            console.log(response);
+            this.props.history.push('/')
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        
+     }
+     render(){
         return (
             
             <div className="login-form">
@@ -60,4 +64,4 @@ import { useHistory } from 'react-router'
             </div>
         );
     }
-export default Login
+}
