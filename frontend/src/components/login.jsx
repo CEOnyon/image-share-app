@@ -1,67 +1,83 @@
 
-import React, { Component }  from 'react';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { ToastContainer, toast } from "react-toastify";
 
-export default class Login extends Component {
-    constructor(props){
-        super(props);
-        this.state ={
-            email: "email",
-            password: "password",
+function Login() {
+  const [cookies] = useCookies([]);
+  const history = useHistory();
+  useEffect(() => {
+    if (cookies.jwt) {
+      history.push("/");
+    }
+  }, [cookies, history]);
+
+  const [values, setValues] = useState({ email: "", password: "" });
+  const generateError = (error) =>
+    toast.error(error, {
+      position: "bottom-right",
+    });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/login",
+        {
+          ...values,
+        },
+        { withCredentials: true }
+      );
+      if (data) {
+        if (data.errors) {
+          const { email, password } = data.errors;
+          if (email) generateError(email);
+          else if (password) generateError(password);
+        } else {
+          history.push("/");
         }
+      }
+    } catch (ex) {
+      console.log(ex);
     }
-    handleChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value,
-        })
-    }
-
-    login = () => {
-        const {username, password} = this.state;
-
-        axios(`/users/login`, {
-          method: "POST", 
-          data: {
-              username,
-              password,
-          }
-        })
-        .then(response => {
-            localStorage.setItem('token', response.data.token);
-            console.log(response);
-            this.props.history.push('/')
-        })
-        .catch(error => {
-            console.log(error)
-        })
-        
-     }
-     render(){
-        return (
-            
-            <div className="login-form">
-            <form>
-                <h3>Log in</h3>
-                    <div className="form-group">
-                    <label>Email</label>
-                    <input type="email" className="form-control" placeholder="Enter email" />
-                </div>
-
+  };
+  return (
+    
+        <div className="login-form">
+            <h3>Login </h3>
+            <form onSubmit={(e) => handleSubmit(e)}>
                 <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
+                <label htmlFor="email">Email</label>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    onChange={(e) => 
+                        setValues({ ...values, [e.target.name]: e.target.value })
+                    }
+                />
                 </div>
-
                 <div className="form-group">
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                    </div>
+                <label htmlFor="password">Password</label>
+                <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    onChange={(e) =>
+                        setValues({ ...values, [e.target.name]: e.target.value })
+                    }
+                />
                 </div>
-
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
-            </form>
-            </div>
-        );
-    }
+            <button type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
+        <div>
+            Don't have an account ? <a href="/signup">Sign Up</a>
+        </div>
+      </form>
+      <ToastContainer />
+    </div>
+    
+  );
 }
+
+export default Login;
