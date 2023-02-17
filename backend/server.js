@@ -11,8 +11,8 @@ import { nanoid } from "nanoid";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser"
-import userRouter from "./routes/user.routes";
 
+import userRouter from "./routes/user.routes";
 
 // Setup Express
 const app = express();              
@@ -32,7 +32,7 @@ const upload = multer({
   // Setup Middleware
 app.use(express.static('public'));
 app.use(cors({
-  origin: ["http://localhost:5001"],
+  origin: ["http://localhost:3000"],
   methods: ["GET", "POST"],
   credentials: true,
 }));
@@ -43,7 +43,7 @@ app.use(cookieParser());
 
 
  // Start Express
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5003;
 // app.listen(port, () =>{
 //   console.log(`Server is running on: ${port}`)
 // }); 
@@ -55,8 +55,10 @@ app.get("/", (req, res) => {
 });
 
 //routes
-app.use('/Users', userRouter)
+app.use('/login', loginUser)
+app.use('/signup', registerUser)
 
+app.use('/Users', userRouter)
 
 // app.use('/api/post', images)
 // app.use('/api/view', images)

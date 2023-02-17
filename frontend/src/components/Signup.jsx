@@ -46,8 +46,8 @@ function SignUp() {
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="formlayout">
       <h2>Register Account</h2>
+      <div>
         <div className="emailbox">
-          
           <input
             type="email"
             name="email"
