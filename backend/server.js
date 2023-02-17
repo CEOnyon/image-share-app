@@ -11,6 +11,7 @@ import { nanoid } from "nanoid";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser"
+import { loginUser, registerUser } from "./controllers/usercontroller";
 
 
 // Setup Express
@@ -52,6 +53,13 @@ const port = process.env.PORT || 5001;
 app.get("/", (req, res) => {
     return res.send("Hello World.").end();
 });
+
+//routes
+app.use('/login', loginUser)
+app.use('/register', registerUser)
+
+// app.use('/api/post', images)
+// app.use('/api/view', images)
 
 //mongoose
 mongoose.connect(process.env.MONGO_URI)
@@ -135,3 +143,6 @@ app.post("/upload", upload.single('image'), async (req, res) => {
     return res.json(output);
   
   });
+
+  app.use('/api/cards', cardsRoutes)
+app.use('/api/user', userRoutes)
