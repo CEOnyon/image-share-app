@@ -9,7 +9,7 @@ import cors from "cors";
 import multer from "multer";
 import { nanoid } from "nanoid";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
-// import mongoose from "mongoose";
+import mongoose from "mongoose";
 import cookieParser from "cookie-parser"
 
 
@@ -52,6 +52,17 @@ app.listen(port, () =>{
 app.get("/", (req, res) => {
     return res.send("Hello World.").end();
 });
+
+//mongoose
+const connectDB = async () => {
+  try {
+      const conn = await mongoose.connect(process.env.MONGO_URI)
+      console.log(`MongoDB connected: ${conn.connection.host}`.blue);
+  } catch (error) {
+      console.log(error);
+      process.exit(1)
+  }
+}
 
 // Image Upload
 app.post("/upload", upload.single('image'), async (req, res) => {
