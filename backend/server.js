@@ -4,19 +4,14 @@ dotenv.config();
 
 //allows use of express cors and moongoose
 
+import express from "express";
+import cors from "cors";
+import multer from "multer";
+import { nanoid } from "nanoid";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
+// import mongoose from "mongoose";
+import cookieParser from "cookie-parser"
 
-const express = require("express")
-const cors = require("cors")
-const multer = require("multer")
-// import {readChunk} from 'read-chunk'; --->check import
-// check minimumBytes as it states not read but declared
-// import imageType, {minimumBytes} from 'image-type'; 
-const nanoid = require("nanoid")
-// import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
-const { PutObjectCommand, S3Client } = require("@aws-sdk/client-s3")
-const mongoose = require("mongoose");
-const authRoutes = require("./routes/authRoutes");
-const cookieParser = require("cookie-parser");
 
 // Setup Express
 const app = express();              
@@ -36,7 +31,7 @@ const upload = multer({
   // Setup Middleware
 app.use(express.static('public'));
 app.use(cors({
-  origin: ["http://localhost:5003"],
+  origin: ["http://localhost:5001"],
   methods: ["GET", "POST"],
   credentials: true,
 }));
@@ -44,7 +39,7 @@ app.use(cors({
 // Login and Signup
 app.use(cookieParser());
 
-app.use("/", authRoutes);
+
 
  // Start Express
 const port = process.env.PORT || 5001;

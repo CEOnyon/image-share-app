@@ -22,7 +22,7 @@ function SignUp() {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/signup",
+        "http://localhost:5003/signup",
         {
           ...values,
         },
