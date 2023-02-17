@@ -72,6 +72,10 @@ padding-bottom: 2vh ;
   font-size: 1.5vh;
 }
 
+.passwordbox{
+  padding-bottom: 2.5vh;
+}
+
 .formlayout{
   background-color:whitesmoke ;
   height:35vh;
