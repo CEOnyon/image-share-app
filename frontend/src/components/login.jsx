@@ -1,63 +1,83 @@
-import { useContext, useState }  from 'react';
-import { useHistory } from 'react-router'
 
-    function Login() {
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { ToastContainer, toast } from "react-toastify";
 
-        const history = useHistory()
-    
-        const { setCurrentUser } = useContext(CurrentUser)
-    
-        const [credentials, setCredentials] = useState({
-            email: '',
-            password: ''
-        })
-    
-        const [errorMessage, setErrorMessage] = useState(null)
-    
-        async function handleSubmit(e) {
-            e.preventDefault()
-           const response = await fetch('http://localhost:5000/authentication/', {
-            method: 'POST',
-            headers: {
-                'Content.Type': 'application/json'
-            },
-            body: JSON.stringify(credentials)
-           });
-           const data = await response.json();
-           
-           if (response.status === 200) {
-            setCurrentUser(data.user)
-            history.push('/')
-           } else {
-            setErrorMessage(data.message)
-           }
-        }
-    
-        return (
-            
-            <div className="login-form">
-            <form>
-                <h3>Log in</h3>
-                    <div className="form-group">
-                    <label>Email</label>
-                    <input type="email" className="form-control" placeholder="Enter email" />
-                </div>
-
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
-                </div>
-
-                <div className="form-group">
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                    </div>
-                </div>
-
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
-            </form>
-            </div>
-        );
+function Login() {
+  const [cookies] = useCookies([]);
+  const history = useHistory();
+  useEffect(() => {
+    if (cookies.jwt) {
+      history.push("/");
     }
-export default Login
+  }, [cookies, history]);
+
+  const [values, setValues] = useState({ email: "", password: "" });
+  const generateError = (error) =>
+    toast.error(error, {
+      position: "bottom-right",
+    });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/login",
+        {
+          ...values,
+        },
+        { withCredentials: true }
+      );
+      if (data) {
+        if (data.errors) {
+          const { email, password } = data.errors;
+          if (email) generateError(email);
+          else if (password) generateError(password);
+        } else {
+          history.push("/");
+        }
+      }
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+  return (
+    
+        <div className="login-form">
+            <h3>Login </h3>
+            <form onSubmit={(e) => handleSubmit(e)}>
+                <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    onChange={(e) => 
+                        setValues({ ...values, [e.target.name]: e.target.value })
+                    }
+                />
+                </div>
+                <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    onChange={(e) =>
+                        setValues({ ...values, [e.target.name]: e.target.value })
+                    }
+                />
+                </div>
+            <button type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
+        <div>
+            Don't have an account ? <a href="/signup">Sign Up</a>
+        </div>
+      </form>
+      <ToastContainer />
+    </div>
+    
+  );
+}
+
+export default Login;

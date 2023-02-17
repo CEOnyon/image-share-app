@@ -1,64 +1,80 @@
-import { useState } from "react"
-import { useHistory } from "react-router"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { useCookies } from "react-cookie";
+import { useHistory } from "react-router-dom";
 
 function SignUp() {
-
-	const history = useHistory()
-
-	const [user, setUser] = useState({
-		firstName: '',
-		lastName: '',
-		email: '',
-		password: ''
-	})
-
-	async function handleSubmit(e) {
-		e.preventDefault()
-
-		await fetch(`http://localhost:5000/users/`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(user)
-		})
-
-		history.push(`/`)
-	}
-
-        return (
-            <div className="signup-form">
-            <form>
-                <h3>Register</h3>
-                
-                <div className="form-group">
-                    <label>First name</label>
-                    <input type="text" className="form-control" placeholder="First name" />
-                </div>
-
-                <div className="form-group">
-                    <label>Last name</label>
-                    <input type="text" className="form-control" placeholder="Last name" />
-                </div>
-
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type="email" className="form-control" placeholder="Enter email" />
-                </div>
-
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
-                </div>
-
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
-                <p className="forgot-password text-right" style={{fontSize:20}}>
-                    Already registered <a href="/login">log in?</a>
-                </p>
-            </form>
-            </div>
-        );
+  const [cookies] = useCookies(["cookie-name"]);
+  const history = useHistory();
+  useEffect(() => {
+    if (cookies.jwt) {
+      history.push("/");
     }
+  }, [cookies, history]);
 
-export default SignUp
+  const [values, setValues] = useState({ email: "", password: "" });
+  const generateError = (error) =>
+    toast.error(error, {
+      position: "bottom-right",
+    });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/signup",
+        {
+          ...values,
+        },
+        { withCredentials: true }
+      );
+      if (data) {
+        if (data.errors) {
+          const { email, password } = data.errors;
+          if (email) generateError(email);
+          else if (password) generateError(password);
+        } else {
+          history.push("/");
+        }
+      }
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+  return (
+    <div className="signup-form">
+      <h2>Register Account</h2>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={(e) =>
+              setValues({ ...values, [e.target.name]: e.target.value })
+            }
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={(e) =>
+              setValues({ ...values, [e.target.name]: e.target.value })
+            }
+          />
+        </div>
+        <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
+        <span>
+            Already registered <a href="/login">log in?</a>
+        </span>
+      </form>
+      <ToastContainer />
+    </div>
+  );
+}
 
+export default SignUp;
