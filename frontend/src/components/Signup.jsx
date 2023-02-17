@@ -46,7 +46,6 @@ function SignUp() {
       <form onSubmit={(e) => handleSubmit(e)}>
       <h2>Register Account</h2>
         <div>
-          
           <input
             type="email"
             name="email"
