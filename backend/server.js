@@ -31,7 +31,7 @@ const upload = multer({
   // Setup Middleware
 app.use(express.static('public'));
 app.use(cors({
-  origin: ["http://localhost:5001"],
+  origin: ["http://localhost:3000"],
   methods: ["GET", "POST"],
   credentials: true,
 }));
@@ -42,7 +42,7 @@ app.use(cookieParser());
 
 
  // Start Express
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5003;
 // app.listen(port, () =>{
 //   console.log(`Server is running on: ${port}`)
 // }); 
