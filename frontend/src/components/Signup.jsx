@@ -67,9 +67,9 @@ function SignUp() {
           />
         </div>
         <button type="submit" className="btn btn-dark btn-md btn-block">Register</button>
-        <span>
+        <div>
             Already registered <a href="/login">log in?</a>
-        </span>
+        </div>
       </form>
       <ToastContainer />
     </div>
