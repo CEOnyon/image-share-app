@@ -42,11 +42,11 @@ function SignUp() {
     }
   };
   return (
-    <div className="signup-form">
-      <h2>Register Account</h2>
+    <div className="signup-form"> 
       <form onSubmit={(e) => handleSubmit(e)}>
+      <h2>Register Account</h2>
         <div>
-          <label htmlFor="email">Email</label>
+          
           <input
             type="email"
             name="email"
@@ -57,7 +57,6 @@ function SignUp() {
           />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
           <input
             type="password"
             placeholder="Password"
@@ -67,7 +66,7 @@ function SignUp() {
             }
           />
         </div>
-        <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
+        <button type="submit" className="btn btn-dark btn-md btn-block">Register</button>
         <span>
             Already registered <a href="/login">log in?</a>
         </span>
