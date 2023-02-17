@@ -43,9 +43,9 @@ app.use(cookieParser());
 
  // Start Express
 const port = process.env.PORT || 5001;
-app.listen(port, () =>{
-  console.log(`Server is running on: ${port}`)
-}); 
+// app.listen(port, () =>{
+//   console.log(`Server is running on: ${port}`)
+// }); 
 
 
 // Default Homepage
@@ -54,15 +54,26 @@ app.get("/", (req, res) => {
 });
 
 //mongoose
-const connectDB = async () => {
-  try {
-      const conn = await mongoose.connect(process.env.MONGO_URI)
-      console.log(`MongoDB connected: ${conn.connection.host}`.blue);
-  } catch (error) {
-      console.log(error);
-      process.exit(1)
-  }
-}
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log(`Connected to DB and and listing on the portsies`)
+    })
+  })
+
+// const connectDB = async () => {
+//   try {
+//       const conn = await mongoose.connect(process.env.MONGO_URI)
+//       .then(() => {
+//         //listen for request
+//         app.listen
+//       })
+//       console.log(`MongoDB connected: ${conn.connection.host}`.blue);
+//   } catch (error) {
+//       console.log(error);
+//       process.exit(1)
+//   }
+// }
 
 // Image Upload
 app.post("/upload", upload.single('image'), async (req, res) => {
