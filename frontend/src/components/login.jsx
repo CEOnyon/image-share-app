@@ -45,8 +45,9 @@ function Login() {
     
         <div className="login-form">  
             <form onSubmit={(e) => handleSubmit(e)}>
+              <div className="formlayout">
               <h2>Login</h2>
-                <div className="form-group"> 
+                <div className="emailbox"> 
                 <input
                     type="email"
                     name="email"
@@ -56,7 +57,7 @@ function Login() {
                     }
                 />
                 </div>
-                <div className="form-group">
+                <div className="passwordbox">
                 <input
                     type="password"
                     placeholder="Password"
@@ -67,8 +68,9 @@ function Login() {
                 />
                 </div>
             <button type="submit" className="btn btn-dark btn-md btn-block">Submit</button>
-        <div>
+        <div className="donthave">
             Don't have an account ? <a href="/signup">Sign Up</a>
+        </div>
         </div>
       </form>
       <ToastContainer />

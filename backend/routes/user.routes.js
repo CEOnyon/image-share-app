@@ -25,14 +25,14 @@ router.post(`/login`, loginUser);
 router.post(`/signup`, registerUser); 
 
 //image stuff
-//getting pictures
-router.get('/api/images', getImage);
+// //getting pictures
+// router.get('/api/images', getImage);
 
-//posting pictures
-router.post('/api/upload', postImage);
+// //posting pictures
+// router.post('/api/upload', postImage);
 
 
 //will figure out latter
 //router.get()
 
-module.exports = router;
+module.exports = userRouter;
