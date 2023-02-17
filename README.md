@@ -20,4 +20,25 @@ Url:"https://wbd.ms/share/v2/aHR0cHM6Ly93aGl0ZWJvYXJkLm1pY3Jvc29mdC5jb20vYXBpL3Y
 #Unsplash
 Photo by <a href="https://unsplash.com/@rodi01?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Rodrigo Soares</a> on <a href="https://unsplash.com/photos/8BFWBUkSqQo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
+#NPM Installs
+#Backend
+npm i express
+npm i mongodb
+npm i mongoose
+npm i nanoid
+npm i multer
+npm i cors
+npm i validator
+npm i dotenv
+npm i cloudinary
+npm i @aws-sdk/client-s3
+
+#Frontend
+npm i react-toastify@9.0.3
+npm i react-cookie
+npm i axios
+npm i bootstrap
+npm i react-bootstrap
+npm i react-bootstrap-icons
+npm i cloudinary-react
 

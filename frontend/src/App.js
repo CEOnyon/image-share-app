@@ -19,7 +19,7 @@ function App() {
           <Route exact path="/upload" component={Upload} />
           <Route exact path="/"component={Home} />
           <Route exact path='/login' component={Login}/>
-          <Route exact path="/signUp"component={SignUp} />
+          <Route exact path="/signup"component={SignUp} />
           <Route exact path='/error' component={Error}/>
         </Switch>
       </Router>
