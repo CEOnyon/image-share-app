@@ -45,6 +45,7 @@ function Login() {
     
         <div className="login-form">  
             <form onSubmit={(e) => handleSubmit(e)}>
+              <div className="formlayout">
               <h2>Login</h2>
                 <div className="emailbox"> 
                 <input
@@ -69,6 +70,7 @@ function Login() {
             <button type="submit" className="btn btn-dark btn-md btn-block">Submit</button>
         <div className="donthave">
             Don't have an account ? <a href="/signup">Sign Up</a>
+        </div>
         </div>
       </form>
       <ToastContainer />
