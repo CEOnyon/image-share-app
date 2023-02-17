@@ -67,7 +67,7 @@ function Login() {
                 />
                 </div>
             <button type="submit" className="btn btn-dark btn-md btn-block">Submit</button>
-        <div>
+        <div className="donthave">
             Don't have an account ? <a href="/signup">Sign Up</a>
         </div>
       </form>

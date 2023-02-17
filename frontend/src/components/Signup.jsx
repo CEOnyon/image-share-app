@@ -44,6 +44,7 @@ function SignUp() {
   return (
     <div className="signup-form"> 
       <form onSubmit={(e) => handleSubmit(e)}>
+        <div className="formlayout">
       <h2>Register Account</h2>
         <div className="emailbox">
           
@@ -67,8 +68,9 @@ function SignUp() {
           />
         </div>
         <button type="submit" className="btn btn-dark btn-md btn-block">Register</button>
-        <div>
+        <div className="donthave">
             Already registered <a href="/login">log in?</a>
+        </div>
         </div>
       </form>
       <ToastContainer />

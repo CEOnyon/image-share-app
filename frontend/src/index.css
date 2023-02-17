@@ -55,11 +55,18 @@ code {
   display: center;
 }
 
-h2{
+h2, .donthave{
   color: black;
-  ;
+  font-weight: 500;
 }
 
 .emailbox, .passwordbox{
   padding-bottom: 10px; ;
+}
+
+.formlayout{
+  background-color: yellow;
+  height:40vh;
+  width: 40vh;
+  text-align: center;
 }
