@@ -45,7 +45,7 @@ function SignUp() {
     <div className="signup-form"> 
       <form onSubmit={(e) => handleSubmit(e)}>
       <h2>Register Account</h2>
-        <div>
+        <div className="emailbox">
           
           <input
             type="email"
@@ -56,7 +56,7 @@ function SignUp() {
             }
           />
         </div>
-        <div>
+        <div className="passwordbox">
           <input
             type="password"
             placeholder="Password"

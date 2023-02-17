@@ -46,7 +46,7 @@ function Login() {
         <div className="login-form">  
             <form onSubmit={(e) => handleSubmit(e)}>
               <h2>Login</h2>
-                <div className="form-group"> 
+                <div className="emailbox"> 
                 <input
                     type="email"
                     name="email"
@@ -56,7 +56,7 @@ function Login() {
                     }
                 />
                 </div>
-                <div className="form-group">
+                <div className="passwordbox">
                 <input
                     type="password"
                     placeholder="Password"
