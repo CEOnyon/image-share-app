@@ -35,4 +35,4 @@ router.post(`/signup`, registerUser);
 //will figure out latter
 //router.get()
 
-module.exports = router;
+module.exports = userRouter;

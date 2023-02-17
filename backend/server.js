@@ -11,7 +11,7 @@ import { nanoid } from "nanoid";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser"
-import userRoutes from "./routes/user.routes";
+import userRouter from "./routes/user.routes";
 
 
 // Setup Express
@@ -55,7 +55,7 @@ app.get("/", (req, res) => {
 });
 
 //routes
-app.use('/Users', userRoutes)
+app.use('/Users', userRouter)
 
 
 // app.use('/api/post', images)
@@ -143,6 +143,3 @@ app.post("/upload", upload.single('image'), async (req, res) => {
     return res.json(output);
   
   });
-
-  app.use('/api/cards', cardsRoutes)
-app.use('/api/user', userRoutes)
