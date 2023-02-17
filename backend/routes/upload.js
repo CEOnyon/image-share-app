@@ -26,10 +26,10 @@ router.post(`/signup`, registerUser);
 
 //image stuff
 //getting pictures
-app.get('/api/images', getImage);
+router.get('/api/images', getImage);
 
 //posting pictures
-app.post('/api/upload', postImage);
+router.post('/api/upload', postImage);
 
 
 //will figure out latter
