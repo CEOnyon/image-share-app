@@ -54,8 +54,10 @@ export default function Upload() {
     };
     return (
         <container id="container">
-        <div>
-            <h1 className="title"><i className="bi bi-file-plus-fill" style={{ fontSize: 30 }}></i>New Post</h1>
+
+        <div className="formlayout">
+            <h1 className="title"><i class="bi bi-file-plus-fill" style={{ fontSize: 30 }}></i>New Post</h1>
+
             <Alert msg={errMsg} type="danger" />
             <Alert msg={successMsg} type="success" />
             <form onSubmit={handleSubmitFile} className="form">
