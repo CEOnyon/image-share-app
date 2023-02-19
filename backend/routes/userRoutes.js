@@ -1,7 +1,4 @@
-
-
 const router = require(`express`).Router();
-
 
 //deconstruct to get register and login
 const { registerUser, loginUser, getMe } = require(`../controllers/userController`);
@@ -35,6 +32,5 @@ router.get('/api/images', getImage);
 
 //posting pictures
 router.post('/api/upload', postImage);
-
 
 module.exports = router
