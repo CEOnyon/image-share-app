@@ -1,18 +1,26 @@
 // Load Local Environment Configuration
-import * as dotenv from "dotenv";
-dotenv.config();
+// import * as dotenv from "dotenv";
+// dotenv.config();
+const dotenv = require('dotenv').config()
 
 //allows use of express cors and moongoose
+const express = require('express');
+const cors = require('cors');
+const multer = require('multer');
+// const {nanoid} = requre('nanoid');
+const { PutObjectCommand, S3Client } = require('@aws-sdk/client-s3')
+const mongoose = require('mongoose')
+const cookieParser = require('cookie-parser')
+const userRouter = require('./routes/userRoutes')
 
-import express from "express";
-import cors from "cors";
-import multer from "multer";
-import { nanoid } from "nanoid";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
-import mongoose from "mongoose";
-import cookieParser from "cookie-parser"
-
-import userRouter from "./routes/user.routes";
+// import express from "express";
+// import cors from "cors";
+// import multer from "multer";
+// import { nanoid } from "nanoid";
+// import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
+// import mongoose from "mongoose";
+// import cookieParser from "cookie-parser"
+// import userRouter from "./routes/userRoutes.js";
 
 // Setup Express
 const app = express();              

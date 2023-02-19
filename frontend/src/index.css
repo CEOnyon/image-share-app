@@ -40,8 +40,24 @@ code {
   min-height: 100vh;
   color: rgb(182, 182, 183);
 }
-#container{
-  padding-top: 5%;
+
+.upload{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding-top: 20%;
+}
+.upload-box{
+  background-color:whitesmoke ;
+  height:30vh;
+  width: 45vh;
+  text-align: center;
+  border-radius: 2%;
+  padding-top: 1.5vh;
+}
+
+.upload-form{
+  padding-top:1.5vh;
 }
 
 .error404{
@@ -68,18 +84,14 @@ padding-bottom: 2vh ;
 }
 
 .emailbox, .passwordbox{
-  padding-bottom: 1vh; 
-  font-size: 1.5vh;
-}
-
-.passwordbox{
-  padding-bottom: 2.5vh;
+  padding-bottom: 2.5vh; 
+  font-size: 1.8vh;
 }
 
 .formlayout{
   background-color:whitesmoke ;
-  height:35vh;
-  width: 25vh;
+  height:40vh;
+  width: 44vh;
   text-align: center;
   border-radius: 2%;
   padding-top: 1.5vh;
