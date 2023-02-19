@@ -1,18 +1,16 @@
-// Load Local Environment Configuration
-import * as dotenv from "dotenv";
-dotenv.config();
+const express = require('express')
+require('dotenv').config()
 
 //allows use of express cors and moongoose
+const express = require('express');
+const cors = require('cors');
+const multer = require('multer');
 
-import express from "express";
-import cors from "cors";
-import multer from "multer";
-import { nanoid } from "nanoid";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
-import mongoose from "mongoose";
-import cookieParser from "cookie-parser"
-
-import userRouter from "./routes/user.routes";
+// const {nanoid} = requre('nanoid');
+const { PutObjectCommand, S3Client } = require('@aws-sdk/client-s3')
+const mongoose = require('mongoose')
+const cookieParser = require('cookie-parser')
+const userRouter = require('./routes/userRoutes')
 
 // Setup Express
 const app = express();              
@@ -43,7 +41,7 @@ app.use(cookieParser());
 
 
  // Start Express
-const port = process.env.PORT || 5003;
+// const port = process.env.PORT || 5003;
 // app.listen(port, () =>{
 //   console.log(`Server is running on: ${port}`)
 // }); 
@@ -67,7 +65,7 @@ app.use('/Users', userRouter)
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(process.env.PORT, () => {
-      console.log(`Connected to DB and and listing on the portsies`)
+      console.log(`Listening on ${process.env.PORT}`)
     })
   })
 

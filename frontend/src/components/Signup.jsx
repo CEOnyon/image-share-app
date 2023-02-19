@@ -45,8 +45,7 @@ function SignUp() {
     <div className="signup-form"> 
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="formlayout">
-      <h2>Register Account</h2>
-      <div>
+        <h2>Register Account</h2>
         <div className="emailbox">
           <input
             type="email"
@@ -75,7 +74,8 @@ function SignUp() {
       </form>
       <ToastContainer />
     </div>
-  );
+    
+  )
 }
 
 export default SignUp;

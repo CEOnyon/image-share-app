@@ -53,14 +53,13 @@ export default function Upload() {
         }
     };
     return (
-        <container id="container">
+        <div className="upload">
+            <div className="upload-box">
+                <h2><i class="bi bi-file-plus-fill" style={{ fontSize: 30 }}></i>New Post</h2>
 
-        <div className="formlayout">
-            <h1 className="title"><i class="bi bi-file-plus-fill" style={{ fontSize: 30 }}></i>New Post</h1>
-
-            <Alert msg={errMsg} type="danger" />
-            <Alert msg={successMsg} type="success" />
-            <form onSubmit={handleSubmitFile} className="form">
+                <Alert msg={errMsg} type="danger" />
+                <Alert msg={successMsg} type="success" />
+                <form onSubmit={handleSubmitFile} className="upload-form">
                 <input
                     id="fileInput"
                     type="file"
@@ -69,16 +68,18 @@ export default function Upload() {
                     value={fileInputState}
                     className="form-input"
                 />
-                <button className="btn btn-primary btn-md btn-block" type="submit">Submit</button>
-            </form>
-            {previewSource && (
-                <img
+                <div>
+                    <button className="btn btn-primary btn-md btn-block" type="submit">Submit</button>
+                </div>
+                </form>
+                    {previewSource && (
+                    <img
                     src={previewSource}
                     alt="chosen"
                     style={{ height: '300px' }}
-                />
-            )}
+                    />
+                    )}
+            </div>
         </div>
-        </container>
     );
 }
