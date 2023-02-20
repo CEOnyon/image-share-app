@@ -1,5 +1,4 @@
-const express = require('express')
-require('dotenv').config()
+const dotenv = require('dotenv').config()
 
 //allows use of express cors and moongoose
 const express = require('express');
@@ -11,6 +10,8 @@ const { PutObjectCommand, S3Client } = require('@aws-sdk/client-s3')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const userRouter = require('./routes/userRoutes')
+const  {errorHandler} = require('./middleware/errMiddleware')
+const connectDB = require('./config/db')
 
 // Setup Express
 const app = express();              
@@ -28,7 +29,7 @@ const upload = multer({
   });
 
   // Setup Middleware
-app.use(express.static('public'));
+app.use(express.static('backend/public'));
 app.use(cors({
   origin: ["http://localhost:3000"],
   methods: ["GET", "POST"],
@@ -41,10 +42,10 @@ app.use(cookieParser());
 
 
  // Start Express
-// const port = process.env.PORT || 5003;
-// app.listen(port, () =>{
-//   console.log(`Server is running on: ${port}`)
-// }); 
+const port = process.env.PORT || 5003;
+app.listen(port, () =>{
+  console.log(`Server is running on: ${port}`)
+}); 
 
 
 // Default Homepage
@@ -52,36 +53,18 @@ app.get("/", (req, res) => {
     return res.send("Hello World.").end();
 });
 
-//routes
-app.use('/login', loginUser)
-app.use('/signup', registerUser)
+//MIDDLEWARE
+app.use('/api/login', require('./routes/userRoutes'))
+app.use('/api/signup', require('./routes/userRoutes'))
 
-app.use('/Users', userRouter)
+app.use('/api/post', require('./routes/imagesRoutes'))
+app.use('/api/get', require('./routes/imagesRoutes'))
 
-// app.use('/api/post', images)
-// app.use('/api/view', images)
+app.use(errorHandler)
 
 //mongoose
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    app.listen(process.env.PORT, () => {
-      console.log(`Listening on ${process.env.PORT}`)
-    })
-  })
 
-// const connectDB = async () => {
-//   try {
-//       const conn = await mongoose.connect(process.env.MONGO_URI)
-//       .then(() => {
-//         //listen for request
-//         app.listen
-//       })
-//       console.log(`MongoDB connected: ${conn.connection.host}`.blue);
-//   } catch (error) {
-//       console.log(error);
-//       process.exit(1)
-//   }
-// }
+connectDB()
 
 // Image Upload
 app.post("/upload", upload.single('image'), async (req, res) => {

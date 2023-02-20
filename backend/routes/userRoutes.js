@@ -1,18 +1,19 @@
-const router = require(`express`).Router();
+const express = require('express')
+const router = express.Router();
 
 //deconstruct to get register and login
 const { registerUser, loginUser, getMe } = require(`../controllers/userController`);
-const { getImage, postImage} = require(`../controllers/pictureController`);
+// const { getImage, postImage} = require(`../controllers/pictureController`);
 const {protect} = require('../middleware/authMiddleware');
 
 //middleware simplifying form-data for uploads
-const multer  = require('multer');
-const Upload = require("../models/pictureModels");
+// const multer  = require('multer');
+// const Upload = require("../models/pictureModels");
 
 
 //setting options for multer
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+// const storage = multer.memoryStorage();
+// const upload = multer({ storage: storage });
 
 //Routes by page
 
@@ -28,9 +29,9 @@ router.post(`/signup`, registerUser);
 
 //image stuff
 //getting pictures
-router.get('/api/images', getImage);
+// router.get('/api/images', getImage);
 
-//posting pictures
-router.post('/api/upload', postImage);
+// //posting pictures
+// router.post('/api/upload', postImage);
 
 module.exports = router
