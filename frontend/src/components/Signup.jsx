@@ -48,9 +48,11 @@ function SignUp() {
         <h2>Register Account</h2>
         <div className="emailbox">
           <input
+            required
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder="Enter Email"
+            id="email"
             onChange={(e) =>
               setValues({ ...values, [e.target.name]: e.target.value })
             }
@@ -58,9 +60,11 @@ function SignUp() {
         </div>
         <div className="passwordbox">
           <input
+            required
             type="password"
-            placeholder="Password"
             name="password"
+            placeholder="Enter Password"
+            id="password"
             onChange={(e) =>
               setValues({ ...values, [e.target.name]: e.target.value })
             }
